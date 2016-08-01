@@ -1,0 +1,37 @@
+<h2>Listing posts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Created by</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td class="col-md-6 col-xs-6"><%= post.title %></td>
+        <td><%= post.user.present? ? post.user.email : "n/a" %>, <%= time_ago_in_words(post.created_at) %> ago</td>
+        <!-- <td>
+          <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe, post %>&nbsp;
+          <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_post_path(post) %>&nbsp;
+        <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td> -->
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+
+      <%= link_to 'New Post', new_post_path, class: "btn btn-default" %>
+      <%= link_to icon('eye-open'), post %>
+      <% if user_signed_in? %>
+        <%= link_to icon('edit'), edit_post_path(post) if post.updatable_by? current_user %>
+        <%= link_to icon('trash'), post, method: :delete, data: { confirm: 'Are you sure?' } if post.deletable_by? current_user %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

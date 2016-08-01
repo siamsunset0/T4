@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <h1>SVN Status View</h1>
+  <p>svn commit log</p>
+<% else %>
+  <p><%= link_to "Log in", new_user_session_path, class: 'btn btn-default' %></p>
+<% end %>

@@ -1,0 +1,15 @@
+<center>
+<h1>Welcome to</h1>
+
+<div style="margin-bottom:2em;">
+    <p>Starting of Future.</p>
+</div>
+
+<!-- <p>Stared the Future.</p> -->
+
+<% if user_signed_in? %>
+  <p><%= link_to "Log out", destroy_user_session_path, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-default'%></p>
+<% else %>
+  <p><%= link_to "Log in", new_user_session_path, class: 'btn btn-default' %></p>
+<% end %>
+</center>
